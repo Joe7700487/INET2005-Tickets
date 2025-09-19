@@ -18,7 +18,22 @@ namespace AwesomeTickets.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult EventDetails()
+        {
+            return View();
+        }
+
+        public IActionResult AddEvent()
+        {
+            return View();
+        }
+
+        public IActionResult UpdateEvent()
+        {
+            return View();
+        }
+
+        public IActionResult DeleteEvent()
         {
             return View();
         }
