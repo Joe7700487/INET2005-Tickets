@@ -1,18 +1,16 @@
 ﻿namespace AwesomeTickets.Models
 {
-    public class Event
+    public class Ticket
     {
         // primary key
-        public int EventId { get; set; }
+        public int TicketId { get; set; }
         public string EventTitle { get; set; } = string.Empty;
-        public string EventDescription { get; set; } = string.Empty;
-        public string EventCategory { get; set; } = string.Empty;
         public DateTime EventDate { get; set; }
         public string EventLocation { get; set; } = string.Empty;
-        public string EventOwner { get; set; } = string.Empty;
-        public DateTime DateCreated { get; set; }
+        // foreign key
+        public int EventId { get; set; }
         // navigation property
-        public List<Ticket>? Tickets { get; set; }
+        public Event? Event { get; set; }
     }
 }
 
