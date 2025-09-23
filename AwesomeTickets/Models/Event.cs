@@ -2,17 +2,14 @@
 {
     public class Event
     {
-        // primary key
-        public int EventId { get; set; }
-        public string EventTitle { get; set; } = string.Empty;
-        public string EventDescription { get; set; } = string.Empty;
-        public string EventCategory { get; set; } = string.Empty;
-        public DateTime EventDate { get; set; }
-        public string EventLocation { get; set; } = string.Empty;
-        public string EventOwner { get; set; } = string.Empty;
-        public DateTime DateCreated { get; set; }
-        // navigation property
-        public List<Ticket>? Tickets { get; set; }
+        int EventId { get; set; }
+        String EventTitle { get; set; } = string.Empty;
+        String EventDescription { get; set; } = string.Empty;
+        String EventCategory { get; set; } = string.Empty;
+        DateTime EventDate { get; set; }
+        String EventLocation { get; set; } = string.Empty;
+        String EventOwner { get; set; } = string.Empty;
+        DateTime DateCreated { get; set; }
     }
 }
 
