@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using AwesomeTickets.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<AwesomeTicketsContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AwesomeTicketsContext") ?? throw new InvalidOperationException("Connection string 'AwesomeTicketsContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

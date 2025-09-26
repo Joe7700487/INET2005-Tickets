@@ -1,0 +1,71 @@
+﻿@model IEnumerable<AwesomeTickets.Models.Listing>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ListingTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListingDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListingCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListingLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListingOwner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListingTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListingDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListingCategory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListingLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListingOwner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ListingId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ListingId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ListingId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
