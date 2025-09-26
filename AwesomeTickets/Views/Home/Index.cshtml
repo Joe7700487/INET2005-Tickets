@@ -1,0 +1,18 @@
+﻿@* @model List<AwesomeTickets.Models.Listing>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>All Listings</h1>
+@foreach (var item in Model)
+{
+    <div>
+        <h2>@item.ListingTitle</h2>
+        <p>
+            @item.ListingId<br />
+            @item.ListingDate<br />
+            @item.DateCreated<br />
+            @item.ListingTitle
+        </p>
+    </div>
+} *@
