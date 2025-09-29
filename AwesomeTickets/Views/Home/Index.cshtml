@@ -1,18 +1,71 @@
-﻿@* @model List<AwesomeTickets.Models.Listing>
+﻿@model IEnumerable<AwesomeTickets.Models.Listing>
+
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Index";
 }
 
-<h1>All Listings</h1>
-@foreach (var item in Model)
-{
-    <div>
-        <h2>@item.ListingTitle</h2>
-        <p>
-            @item.ListingId<br />
-            @item.ListingDate<br />
-            @item.DateCreated<br />
-            @item.ListingTitle
-        </p>
-    </div>
-} *@
+<h1>Index</h1>
+
+<p>
+    <a asp-controller="Listings" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ListingTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListingDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListingCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListingLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListingOwner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListingTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListingDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListingCategory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListingLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListingOwner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+            <td>
+                <a asp-controller="Listings" asp-action="Edit" asp-route-id="@item.ListingId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ListingId">Details</a> |
+                <a asp-controller="Listings" asp-action="Delete" asp-route-id="@item.ListingId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

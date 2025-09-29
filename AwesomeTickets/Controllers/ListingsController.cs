@@ -19,29 +19,6 @@ namespace AwesomeTickets.Controllers
             _context = context;
         }
 
-        // GET: Listings
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Listing.ToListAsync());
-        }
-
-        // GET: Listings/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var listing = await _context.Listing
-                .FirstOrDefaultAsync(m => m.ListingId == id);
-            if (listing == null)
-            {
-                return NotFound();
-            }
-
-            return View(listing);
-        }
 
         // GET: Listings/Create
         public IActionResult Create()
@@ -60,7 +37,7 @@ namespace AwesomeTickets.Controllers
             {
                 _context.Add(listing);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             return View(listing);
         }
@@ -111,7 +88,7 @@ namespace AwesomeTickets.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             return View(listing);
         }
@@ -146,7 +123,7 @@ namespace AwesomeTickets.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Home");
         }
 
         private bool ListingExists(int id)
