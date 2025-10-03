@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<AwesomeTickets.Models.Listing>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Listings";
 }
 
-<h1>Index</h1>
+<h1>Event Listings</h1>
 
 <p>
     <a asp-controller="Listings" asp-action="Create">Create New</a>
@@ -12,6 +12,9 @@
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ListingId)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.ListingTitle)
             </th>
@@ -39,6 +42,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListingId)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ListingTitle)
             </td>
