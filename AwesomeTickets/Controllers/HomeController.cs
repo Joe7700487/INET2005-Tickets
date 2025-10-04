@@ -18,7 +18,9 @@ namespace AwesomeTickets.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Listing.ToListAsync());
+            return View(await _context.Listing
+                .OrderBy(l => l.ListingDate)
+                .ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)

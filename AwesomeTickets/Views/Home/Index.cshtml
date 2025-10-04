@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<AwesomeTickets.Models.Listing>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Listings";
 }
 
-<h1>Index</h1>
+<h1>Event Listings</h1>
 
 <p>
-    <a asp-controller="Listings" asp-action="Create">Create New</a>
+    <a asp-controller="Listings" asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -39,17 +39,28 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            <td style="width: 15%;">
                 @Html.DisplayFor(modelItem => item.ListingTitle)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ListingDescription)
+
+            <td style="width: 20%;">
+                @if (item.ListingDescription.Length > 100)
+                {
+                    @($"{item.ListingDescription.Substring(0, 100)}...")
+                    <a asp-action="Details" asp-route-id="@item.ListingId">More</a>
+                }
+                else
+                {
+                    @item.ListingDescription
+                }
             </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.ListingCategory)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ListingDate)
+                @* @Html.DisplayFor(modelItem => item.ListingDate) *@
+                @item.ListingDate.ToString("MMM dd, yyyy")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ListingLocation)
@@ -58,7 +69,8 @@
                 @Html.DisplayFor(modelItem => item.ListingOwner)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DateCreated)
+                @* @Html.DisplayFor(modelItem => item.DateCreated) *@
+                @item.DateCreated.ToString("MMM dd, yyyy")
             </td>
             <td>
                 <a asp-controller="Listings" asp-action="Edit" asp-route-id="@item.ListingId">Edit</a> |

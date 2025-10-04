@@ -4,51 +4,50 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Create Listing</h1>
 
-<h4>Listing</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="ListingTitle" class="control-label"></label>
                 <input asp-for="ListingTitle" class="form-control" />
                 <span asp-validation-for="ListingTitle" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="ListingDescription" class="control-label"></label>
                 <input asp-for="ListingDescription" class="form-control" />
                 <span asp-validation-for="ListingDescription" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="ListingCategory" class="control-label"></label>
                 <input asp-for="ListingCategory" class="form-control" />
                 <span asp-validation-for="ListingCategory" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="ListingDate" class="control-label"></label>
                 <input asp-for="ListingDate" class="form-control" />
                 <span asp-validation-for="ListingDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="ListingLocation" class="control-label"></label>
                 <input asp-for="ListingLocation" class="form-control" />
                 <span asp-validation-for="ListingLocation" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label asp-for="ListingOwner" class="control-label"></label>
                 <input asp-for="ListingOwner" class="form-control" />
                 <span asp-validation-for="ListingOwner" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="DateCreated" class="control-label"></label>
+            @* <div class="mb-3">
+                <label asp-for="DateCreated" class="control-label"></label> 
                 <input asp-for="DateCreated" class="form-control" />
                 <span asp-validation-for="DateCreated" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            </div> *@
+            <div class="mb-3">
+                <input type="submit" value="Create Listing" class="btn btn-primary" />
             </div>
         </form>
     </div>

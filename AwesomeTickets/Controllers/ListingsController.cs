@@ -31,8 +31,9 @@ namespace AwesomeTickets.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ListingId,ListingTitle,ListingDescription,ListingCategory,ListingDate,ListingLocation,ListingOwner,DateCreated")] Listing listing)
+        public async Task<IActionResult> Create([Bind("ListingId,ListingTitle,ListingDescription,ListingCategory,ListingDate,ListingLocation,ListingOwner")] Listing listing)
         {
+            listing.DateCreated = DateTime.Now;
             if (ModelState.IsValid)
             {
                 _context.Add(listing);
