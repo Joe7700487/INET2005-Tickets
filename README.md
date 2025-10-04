@@ -8,4 +8,4 @@ A site to sell tickets for various event listings created with ASP.NET and Boots
 - Clean navigation and layout
   
 ![home page](https://github.com/user-attachments/assets/36c50175-5fb7-4f8d-8186-52832ef808ed)
-![create](https://github.com/user-attachments/assets/514a2cb9-cd04-4e73-9085-7ab8a2ede094)
+![categories](https://github.com/user-attachments/assets/bae09172-8d3b-4460-9df3-5daf65a4c8d1)
