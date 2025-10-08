@@ -11,6 +11,6 @@ namespace AwesomeTickets.Models
         [Display(Name = "Category")]
         public string CategoryName { get; set; } = string.Empty;
         // navigation property
-        public Listing? Listing { get; set; }
+        public List<Listing>? Listings { get; set; }
     }
 }
