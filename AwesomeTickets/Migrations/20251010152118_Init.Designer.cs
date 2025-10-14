@@ -4,6 +4,7 @@ using AwesomeTickets.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AwesomeTickets.Migrations
 {
     [DbContext(typeof(AwesomeTicketsContext))]
-    partial class AwesomeTicketsContextModelSnapshot : ModelSnapshot
+    [Migration("20251010152118_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,12 @@ namespace AwesomeTickets.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ListingId")
+                        .HasColumnType("int");
+
                     b.HasKey("CategoryId");
+
+                    b.HasIndex("ListingId");
 
                     b.ToTable("Category");
                 });
@@ -47,11 +55,12 @@ namespace AwesomeTickets.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ListingId"));
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("ListingCategory")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ListingDate")
                         .HasColumnType("datetime2");
@@ -74,25 +83,21 @@ namespace AwesomeTickets.Migrations
 
                     b.HasKey("ListingId");
 
-                    b.HasIndex("CategoryId");
-
                     b.ToTable("Listing");
-                });
-
-            modelBuilder.Entity("AwesomeTickets.Models.Listing", b =>
-                {
-                    b.HasOne("AwesomeTickets.Models.Category", "Category")
-                        .WithMany("Listings")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("AwesomeTickets.Models.Category", b =>
                 {
-                    b.Navigation("Listings");
+                    b.HasOne("AwesomeTickets.Models.Listing", "Listing")
+                        .WithMany("Categories")
+                        .HasForeignKey("ListingId");
+
+                    b.Navigation("Listing");
+                });
+
+            modelBuilder.Entity("AwesomeTickets.Models.Listing", b =>
+                {
+                    b.Navigation("Categories");
                 });
 #pragma warning restore 612, 618
         }

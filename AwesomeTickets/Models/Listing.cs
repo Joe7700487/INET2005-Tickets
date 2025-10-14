@@ -11,8 +11,6 @@ namespace AwesomeTickets.Models
         public string ListingTitle { get; set; } = string.Empty;
         [Display(Name = "Description")]
         public string ListingDescription { get; set; } = string.Empty;
-        [Display(Name = "Category")]
-        public string ListingCategory { get; set; } = string.Empty;
         [Display(Name = "Date")]
         public DateTime ListingDate { get; set; }
         [Display(Name = "Location")]
@@ -21,7 +19,10 @@ namespace AwesomeTickets.Models
         public string ListingOwner { get; set; } = string.Empty;
         [Display(Name = "Date Created")]
         public DateTime DateCreated { get; set; }
+        // foriegn key
+        //[Display(Name = "Category")]
+        public int CategoryId { get; set; }
         // navigation property
-        public List<Category>? Categories { get; set; }
+        public Category? Category { get; set; }
     }
 }

@@ -23,6 +23,7 @@ namespace AwesomeTickets.Controllers
         // GET: Listings/Create
         public IActionResult Create()
         {
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName");
             return View();
         }
 
@@ -31,7 +32,7 @@ namespace AwesomeTickets.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ListingId,ListingTitle,ListingDescription,ListingCategory,ListingDate,ListingLocation,ListingOwner")] Listing listing)
+        public async Task<IActionResult> Create([Bind("ListingId,ListingTitle,ListingDescription,ListingDate,ListingLocation,ListingOwner,CategoryId")] Listing listing)
         {
             listing.DateCreated = DateTime.Now;
             if (ModelState.IsValid)
@@ -40,6 +41,7 @@ namespace AwesomeTickets.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
             }
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName", listing.CategoryId);
             return View(listing);
         }
 
@@ -56,6 +58,7 @@ namespace AwesomeTickets.Controllers
             {
                 return NotFound();
             }
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName", listing.CategoryId);
             return View(listing);
         }
 
@@ -64,7 +67,7 @@ namespace AwesomeTickets.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ListingId,ListingTitle,ListingDescription,ListingCategory,ListingDate,ListingLocation,ListingOwner,DateCreated")] Listing listing)
+        public async Task<IActionResult> Edit(int id, [Bind("ListingId,ListingTitle,ListingDescription,ListingDate,ListingLocation,ListingOwner,CategoryId")] Listing listing)
         {
             if (id != listing.ListingId)
             {
@@ -75,6 +78,8 @@ namespace AwesomeTickets.Controllers
             {
                 try
                 {
+                    var existingListing = await _context.Listing.AsNoTracking().FirstOrDefaultAsync(l => l.ListingId == id);
+                    listing.DateCreated = existingListing.DateCreated;
                     _context.Update(listing);
                     await _context.SaveChangesAsync();
                 }
@@ -91,6 +96,7 @@ namespace AwesomeTickets.Controllers
                 }
                 return RedirectToAction("Index", "Home");
             }
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryId", listing.CategoryId);
             return View(listing);
         }
 
@@ -103,6 +109,7 @@ namespace AwesomeTickets.Controllers
             }
 
             var listing = await _context.Listing
+                .Include(l => l.Category)
                 .FirstOrDefaultAsync(m => m.ListingId == id);
             if (listing == null)
             {
