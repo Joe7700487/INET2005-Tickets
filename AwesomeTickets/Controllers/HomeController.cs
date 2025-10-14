@@ -20,6 +20,7 @@ namespace AwesomeTickets.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Listing
+                .Include(l => l.Category)
                 .OrderBy(l => l.ListingDate)
                 .ToListAsync());
         }

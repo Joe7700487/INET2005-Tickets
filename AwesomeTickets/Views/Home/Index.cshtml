@@ -31,7 +31,7 @@
                 @Html.DisplayNameFor(model => model.DateCreated)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CategoryId)
+                @Html.DisplayNameFor(model => model.Category)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FileName)
@@ -71,7 +71,7 @@
                 @item.DateCreated.ToString("MMM dd, yyyy")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CategoryId)
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FileName)
