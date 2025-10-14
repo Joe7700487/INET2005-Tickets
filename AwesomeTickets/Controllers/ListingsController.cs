@@ -32,11 +32,27 @@ namespace AwesomeTickets.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ListingId,ListingTitle,ListingDescription,ListingDate,ListingLocation,ListingOwner,CategoryId")] Listing listing)
+        public async Task<IActionResult> Create([Bind("ListingId,ListingTitle,ListingDescription,ListingDate,ListingLocation,ListingOwner,CategoryId,FormFile")] Listing listing)
         {
             listing.DateCreated = DateTime.Now;
             if (ModelState.IsValid)
             {
+
+                if (listing.FormFile != null)
+                {
+
+                    string filename = listing.FormFile.FileName;
+
+                    listing.FileName = filename;
+
+                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", filename);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await listing.FormFile.CopyToAsync(fileStream);
+                    }
+                }
+
                 _context.Add(listing);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
@@ -67,7 +83,7 @@ namespace AwesomeTickets.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ListingId,ListingTitle,ListingDescription,ListingDate,ListingLocation,ListingOwner,CategoryId")] Listing listing)
+        public async Task<IActionResult> Edit(int id, [Bind("ListingId,ListingTitle,ListingDescription,ListingDate,ListingLocation,ListingOwner,CategoryId,FormFile")] Listing listing)
         {
             if (id != listing.ListingId)
             {
@@ -78,6 +94,22 @@ namespace AwesomeTickets.Controllers
             {
                 try
                 {
+
+                    if (listing.FormFile != null)
+                    {
+
+                        string filename = listing.FormFile.FileName;
+
+                        listing.FileName = filename;
+
+                        string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", filename);
+
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await listing.FormFile.CopyToAsync(fileStream);
+                        }
+                    }
+
                     var existingListing = await _context.Listing.AsNoTracking().FirstOrDefaultAsync(l => l.ListingId == id);
                     listing.DateCreated = existingListing.DateCreated;
                     _context.Update(listing);

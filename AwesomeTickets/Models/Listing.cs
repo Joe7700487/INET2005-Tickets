@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AwesomeTickets.Models
 {
@@ -20,9 +21,14 @@ namespace AwesomeTickets.Models
         [Display(Name = "Date Created")]
         public DateTime DateCreated { get; set; }
         // foriegn key
-        //[Display(Name = "Category")]
         public int CategoryId { get; set; }
         // navigation property
         public Category? Category { get; set; }
+
+        [Display(Name = "File Name")]
+        public string FileName { get; set; } = string.Empty;
+        [NotMapped]
+        [Display(Name = "File")]
+        public IFormFile? FormFile { get; set; }
     }
 }
