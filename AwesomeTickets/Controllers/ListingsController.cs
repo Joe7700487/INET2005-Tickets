@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AwesomeTickets.Data;
+using AwesomeTickets.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using AwesomeTickets.Data;
-using AwesomeTickets.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AwesomeTickets.Controllers
 {
@@ -95,13 +96,14 @@ namespace AwesomeTickets.Controllers
             {
                 try
                 {
+                    var existingListing = await _context.Listing.AsNoTracking().FirstOrDefaultAsync(l => l.ListingId == id);
 
                     if (listing.FormFile != null)
                     {
 
                         string filename = listing.FormFile.FileName;
-
-                        listing.FileName = filename;
+                        var date = DateTime.Now;
+                        listing.FileName = date.ToString("HH-mm-ss-ffffff") + "_" + filename;
 
                         string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", filename);
 
@@ -110,8 +112,11 @@ namespace AwesomeTickets.Controllers
                             await listing.FormFile.CopyToAsync(fileStream);
                         }
                     }
-
-                    var existingListing = await _context.Listing.AsNoTracking().FirstOrDefaultAsync(l => l.ListingId == id);
+                    else
+                    {
+                        listing.FormFile = existingListing.FormFile;
+                        listing.FileName = existingListing.FileName;
+                    }
                     listing.DateCreated = existingListing.DateCreated;
                     _context.Update(listing);
                     await _context.SaveChangesAsync();

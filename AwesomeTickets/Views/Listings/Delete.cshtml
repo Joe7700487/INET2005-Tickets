@@ -10,50 +10,65 @@
 <div>
     <h4>Listing</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ListingTitle)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ListingTitle)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ListingDescription)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ListingDescription)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ListingDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ListingDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ListingLocation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ListingLocation)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ListingOwner)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ListingOwner)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateCreated)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CategoryId)
-        </dd>
-    </dl>
+    <div class="row">
+        <div class="col-md-4 w-50">
+            <dl class="row">
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.ListingTitle)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.ListingTitle)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.ListingDescription)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.ListingDescription)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.ListingDate)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.ListingDate)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.ListingLocation)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.ListingLocation)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.ListingOwner)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.ListingOwner)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.DateCreated)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.DateCreated)
+                </dd>
+                <dt class = "col-sm-2">
+                    @Html.DisplayNameFor(model => model.Category)
+                </dt>
+                <dd class = "col-sm-10">
+                    @Html.DisplayFor(model => model.CategoryId)
+                </dd>
+            </dl>
+
+        </div>
+        <div class="col-md-4 w-25">
+            @if (!String.IsNullOrEmpty(Model.FileName))
+            {
+                <img src="/images/@Model.FileName" alt="@Model.FileName" class="img-thumbnail img-fluid mw-100 h-auto" />
+            }
+            else
+            {
+                <img src="/images/site/no-image.jpg" alt="@Model.FileName" class="img-thumbnail img-fluid mw-100 h-auto" />
+            }
+        </div>
+    </div>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="ListingId" />
