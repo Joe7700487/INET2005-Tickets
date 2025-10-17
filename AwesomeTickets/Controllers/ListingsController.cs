@@ -34,14 +34,15 @@ namespace AwesomeTickets.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ListingId,ListingTitle,ListingDescription,ListingDate,ListingLocation,ListingOwner,CategoryId,FormFile")] Listing listing)
         {
-            listing.DateCreated = DateTime.Now;
+            var date = DateTime.Now;
+            listing.DateCreated = date;
             if (ModelState.IsValid)
             {
 
                 if (listing.FormFile != null)
                 {
 
-                    string filename = listing.FormFile.FileName;
+                    string filename = date.ToString("HH-mm-ss-ffffff") + "_" + listing.FormFile.FileName;
 
                     listing.FileName = filename;
 

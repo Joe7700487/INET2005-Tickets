@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.FormFile)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ListingTitle)
             </th>
             <th>
@@ -27,29 +30,35 @@
             <th>
                 @Html.DisplayNameFor(model => model.ListingOwner)
             </th>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.DateCreated)
-            </th>
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FileName)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
+        <tr class="mh-100">
+            <td style="width: 10%;">
+                @if (!String.IsNullOrEmpty(item.FileName))
+                {
+                    <img src="/images/@item.FileName" alt="@item.FileName" class="img-thumbnail img-fluid mw-100 h-auto" />
+                }
+                else {
+                    <img src="/images/site/no-image.jpg" alt="@item.FileName" class="img-thumbnail img-fluid mw-100 h-auto" />
+                }
+            </td>
+            <td class="text-wrap" style="width: 15%;">
                 @Html.DisplayFor(modelItem => item.ListingTitle)
             </td>
 
-            <td>
+            <td class="text-wrap" style="width: 15%;">
                 @if (item.ListingDescription.Length > 100)
                 {
-                    @($"{item.ListingDescription.Substring(0, 100)}...")
+                    @($"{item.ListingDescription.Substring(0, 75)}...")
                     <a asp-action="Details" asp-route-id="@item.ListingId">More</a>
                 }
                 else
@@ -67,14 +76,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ListingOwner)
             </td>
-            <td>
+            @* <td>
                 @item.DateCreated.ToString("MMM dd, yyyy")
-            </td>
+            </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.Category.CategoryName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FileName)
             </td>
             <td>
                 <a asp-controller="Listings" asp-action="Edit" asp-route-id="@item.ListingId">Edit</a> |
