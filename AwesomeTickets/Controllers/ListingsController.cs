@@ -100,10 +100,11 @@ namespace AwesomeTickets.Controllers
 
                     if (listing.FormFile != null)
                     {
-
-                        string filename = listing.FormFile.FileName;
                         var date = DateTime.Now;
-                        listing.FileName = date.ToString("HH-mm-ss-ffffff") + "_" + filename;
+
+                        string filename = date.ToString("HH-mm-ss-ffffff") + "_" + listing.FormFile.FileName;
+
+                        listing.FileName = filename;
 
                         string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", filename);
 
