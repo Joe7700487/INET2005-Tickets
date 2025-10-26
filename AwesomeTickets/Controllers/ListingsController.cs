@@ -1,5 +1,6 @@
 ﻿using AwesomeTickets.Data;
 using AwesomeTickets.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AwesomeTickets.Controllers
 {
+    [Authorize]
     public class ListingsController : Controller
     {
         private readonly AwesomeTicketsContext _context;
