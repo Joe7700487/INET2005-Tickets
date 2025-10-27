@@ -26,7 +26,7 @@ namespace AwesomeTickets.Controllers
         public async Task<IActionResult> Login(string username, string password, string returnUrl)
         {
             // Validate username and password (username and password stored in secrets.json)
-            if (username == _configuration["username"] && password == _configuration["password"])
+            if (username == _configuration["ticket_username"] && password == _configuration["ticket_password"])
             {
                 // Create a list of claims identifying the user
                 var claims = new List<Claim>
