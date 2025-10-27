@@ -1,6 +1,9 @@
 ﻿using AwesomeTickets.Data;
 using AwesomeTickets.Models;
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +19,17 @@ namespace AwesomeTickets.Controllers
     public class ListingsController : Controller
     {
         private readonly AwesomeTicketsContext _context;
+        private readonly IConfiguration _configuration;
+        private readonly BlobContainerClient _containerClient;
 
-        public ListingsController(AwesomeTicketsContext context)
+        public ListingsController(AwesomeTicketsContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
+
+            var connectionString = _configuration["AzureStorage"];
+            var containerName = "uploads";
+            _containerClient = new BlobContainerClient(connectionString, containerName);
         }
 
 
@@ -44,17 +54,16 @@ namespace AwesomeTickets.Controllers
 
                 if (listing.FormFile != null)
                 {
+                    var fileUpload = listing.FormFile;
+                    string blobName = date.ToString("HH-mm-ss-ffffff") + "_" + fileUpload.FileName; ;
+                    var blobClient = _containerClient.GetBlobClient(blobName);
 
-                    string filename = date.ToString("HH-mm-ss-ffffff") + "_" + listing.FormFile.FileName;
-
-                    listing.FileName = filename;
-
-                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", filename);
-
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    using (var stream = fileUpload.OpenReadStream())
                     {
-                        await listing.FormFile.CopyToAsync(fileStream);
+                        await blobClient.UploadAsync(stream, new BlobHttpHeaders { ContentType = fileUpload.ContentType });
                     }
+
+                    listing.FileName = blobClient.Uri.ToString();
                 }
 
                 _context.Add(listing);
@@ -104,16 +113,18 @@ namespace AwesomeTickets.Controllers
                     {
                         var date = DateTime.Now;
 
-                        string filename = date.ToString("HH-mm-ss-ffffff") + "_" + listing.FormFile.FileName;
 
-                        listing.FileName = filename;
 
-                        string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", filename);
+                        var fileUpload = listing.FormFile;
+                        string blobName = date.ToString("HH-mm-ss-ffffff") + "_" + fileUpload.FileName; ;
+                        var blobClient = _containerClient.GetBlobClient(blobName);
 
-                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        using (var stream = fileUpload.OpenReadStream())
                         {
-                            await listing.FormFile.CopyToAsync(fileStream);
+                            await blobClient.UploadAsync(stream, new BlobHttpHeaders { ContentType = fileUpload.ContentType });
                         }
+
+                        listing.FileName = blobClient.Uri.ToString();
                     }
                     else
                     {
