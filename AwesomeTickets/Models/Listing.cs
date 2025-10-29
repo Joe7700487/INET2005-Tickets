@@ -28,7 +28,7 @@ namespace AwesomeTickets.Models
         [Display(Name = "File Name")]
         public string FileName { get; set; } = string.Empty;
         [NotMapped]
-        [Display(Name = "File")]
+        [Display(Name = "Image")]
         public IFormFile? FormFile { get; set; }
     }
 }

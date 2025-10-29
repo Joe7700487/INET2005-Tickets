@@ -16,25 +16,35 @@
                 @Html.DisplayNameFor(model => model.FormFile)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ListingTitle)
+                <a asp-action="Index" asp-route-sortOrder="@(ViewData["TitleSort"])">
+                    @Html.DisplayNameFor(model => model.ListingTitle)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ListingDescription)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ListingDate)
+                <a asp-action="Index" asp-route-sortOrder="@(ViewData["DateSort"])">
+                    @Html.DisplayNameFor(model => model.ListingDate)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ListingLocation)
+                <a asp-action="Index" asp-route-sortOrder="@(ViewData["LocationSort"])">
+                    @Html.DisplayNameFor(model => model.ListingLocation)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ListingOwner)
+                <a asp-action="Index" asp-route-sortOrder="@(ViewData["OwnerSort"])">
+                    @Html.DisplayNameFor(model => model.ListingOwner)
+                </a>
             </th>
             @* <th>
                 @Html.DisplayNameFor(model => model.DateCreated)
             </th> *@
             <th>
-                @Html.DisplayNameFor(model => model.Category)
+                <a asp-action="Index" asp-route-sortOrder="@(ViewData["CategorySort"])">
+                    @Html.DisplayNameFor(model => model.Category)
+                </a>
             </th>
             <th></th>
         </tr>
