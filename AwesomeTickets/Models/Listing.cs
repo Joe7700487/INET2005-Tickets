@@ -24,11 +24,14 @@ namespace AwesomeTickets.Models
         public int CategoryId { get; set; }
         // navigation property
         public Category? Category { get; set; }
+        public List<Purchase>? Purchases { get; set; }
 
         [Display(Name = "File Name")]
         public string FileName { get; set; } = string.Empty;
         [NotMapped]
         [Display(Name = "Image")]
         public IFormFile? FormFile { get; set; }
+
+
     }
 }

@@ -33,9 +33,9 @@ namespace AwesomeTickets.Controllers
             ViewData["OwnerSort"]       = sortOrder == "owner"      ? "owner_desc"      : "owner";
             ViewData["CategorySort"]    = sortOrder == "category"   ? "category_desc"   : "category";
 
-            var listings =  _context.Listing.Include(l => l.Category).AsQueryable();
-                //.OrderBy(l => l.ListingDate)
-                //.ToListAsync());
+            var listings =  _context.Listing.Include(l => l.Category).Include(l => l.Purchases).AsQueryable();
+            //.OrderBy(l => l.ListingDate)
+            //.ToListAsync());
 
             switch (sortOrder)
             {
@@ -86,6 +86,8 @@ namespace AwesomeTickets.Controllers
             }
 
             var listing = await _context.Listing
+                .Include(l => l.Category)
+                .Include(l => l.Purchases) // ensure purchases are loaded
                 .FirstOrDefaultAsync(m => m.ListingId == id);
             if (listing == null)
             {

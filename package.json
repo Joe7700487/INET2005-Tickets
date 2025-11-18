@@ -1,0 +1,12 @@
+{
+  "name": "inet2005-tickets",
+  "version": "1.0.0",
+  "description": "A site to sell tickets for various event listings created with ASP.NET and Bootstrap.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
