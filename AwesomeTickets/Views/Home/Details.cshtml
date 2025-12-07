@@ -86,8 +86,11 @@
                 <tr>
                     <th>Purchase Id</th>
                     <th>Customer</th>
+                    <th>Phone Number</th>
                     <th>Tickets</th>
-                    <th>Payment</th>
+                    <th>Card Number</th>
+                    <th>Expiry</th>
+                    <th>CCV</th>
                 </tr>
             </thead>
             <tbody>
@@ -96,8 +99,11 @@
                     <tr>
                         <td>@purchase.PurchaseId</td>
                         <td>@purchase.Customer</td>
+                        <td>@purchase.CustomerPhoneNumber</td>
                         <td>@purchase.Tickets</td>
-                        <td>@purchase.Payment</td>
+                        <td>@purchase.CardNumber</td>
+                        <td>@purchase.Expiry</td>
+                        <td>@purchase.CCV</td>
                     </tr>
                 }
             </tbody>
